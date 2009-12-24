@@ -1,0 +1,28 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
+  <MonoDevelop.Ide.DebuggingService>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/Weapon.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Assets/src/Thruster.cs" Line="8" Column="31" />
+      <File FileName="Assets/src/FaceHeadingOfParent.cs" Line="15" Column="1" />
+      <File FileName="Assets/src/StationRotation.cs" Line="17" Column="1" />
+      <File FileName="Assets/src/Missile.cs" Line="6" Column="32" />
+      <File FileName="Assets/src/Weapon.cs" Line="18" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="gamma4" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="src" expanded="True">
+                <Node name="Weapon.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
