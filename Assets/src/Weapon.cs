@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour {
 			missile.transform.rotation = transform.rotation;
 			
 			// apply reaction force from Missile for a little "kickback"
-//			transform.rigidbody.AddForce(transform.up * -missile.GetComponent<Missile>().ThrustForce);
+			transform.rigidbody.AddForce(transform.up * -missile.GetComponent<Missile>().ThrustForce);
 		}
 	}
 }

@@ -7,7 +7,7 @@ public class Game : MonoBehaviour {
 	public List<ParticleEmitter> AsteroidEmitters;
 	
 	void Start () {
-		AsteroidEmitters.ForEach(a => a.Emit(1));
+		AsteroidEmitters.ForEach(emitter => emitter.Emit(1));
 	}
 	
 }

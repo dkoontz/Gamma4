@@ -10,6 +10,10 @@ public class Missile : MonoBehaviour {
 		rigidbody.AddForce(transform.up * ThrustForce);
 	}
 	
+	public void OnTriggerEnter() {
+		Destroy(gameObject);
+	}
+	
 	private IEnumerator Cleanup(float timeToLive) {
 		yield return new WaitForSeconds(timeToLive);
 		Destroy(gameObject);
