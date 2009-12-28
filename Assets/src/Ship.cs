@@ -9,10 +9,6 @@ public class Ship : MonoBehaviour {
 	public float ThrusterEnergyUsePerSecond = 100;
 	public float MissileEnergyUsePerShot = 25;
 	public float EnergyRechargePerSecond = 20;
-	
-	public Material HighEnergyMaterial;
-	public Material MediumEnergyMaterial;
-	public Material LowEnergyMaterial;
 		
 	public void Update () {
 		Energy += EnergyRechargePerSecond * Time.deltaTime;

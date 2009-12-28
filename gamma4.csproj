@@ -47,8 +47,11 @@
      <Compile Include="Assets\Standard Assets\Scripts\CombineChildren.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\MeshCombineUtility.cs" />
      <Compile Include="Assets\Standard Assets\Water\Sources\WaterSimple.cs" />
+     <Compile Include="Assets\src\Asteroid.cs" />
      <Compile Include="Assets\src\FaceHeadingOfParent.cs" />
+     <Compile Include="Assets\src\Game.cs" />
      <Compile Include="Assets\src\Missile.cs" />
+     <Compile Include="Assets\src\ObjectSpawner.cs" />
      <Compile Include="Assets\src\Ship.cs" />
      <Compile Include="Assets\src\StationRotation.cs" />
      <Compile Include="Assets\src\Thruster.cs" />
