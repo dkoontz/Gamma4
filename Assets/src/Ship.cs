@@ -4,7 +4,7 @@ using System.Collections;
 public class Ship : MonoBehaviour {
 
 	public float StartingEnergy = 100;
-	public float EnergyRechargePerSecond = 2;
+//	public float EnergyRechargePerSecond = 2;
 	public float ThrusterEnergyUsePerSecond = 100;
 	public float MissileEnergyUsePerShot = 25;
 	public Texture ThrusterIcon;
@@ -21,13 +21,13 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public void Update () {
-		thrusterEnergy += EnergyRechargePerSecond * Time.deltaTime;
-		weaponEnergy += EnergyRechargePerSecond * Time.deltaTime;
-		sensorEnergy += EnergyRechargePerSecond * Time.deltaTime;
+//		thrusterEnergy += EnergyRechargePerSecond * Time.deltaTime;
+//		weaponEnergy += EnergyRechargePerSecond * Time.deltaTime;
+//		sensorEnergy += EnergyRechargePerSecond * Time.deltaTime;
 		
-		if(thrusterEnergy > StartingEnergy) { thrusterEnergy = StartingEnergy; }
-		if(weaponEnergy > StartingEnergy) { weaponEnergy = StartingEnergy; }
-		if(sensorEnergy > StartingEnergy) { sensorEnergy = StartingEnergy; }
+//		if(thrusterEnergy > StartingEnergy) { thrusterEnergy = StartingEnergy; }
+//		if(weaponEnergy > StartingEnergy) { weaponEnergy = StartingEnergy; }
+//		if(sensorEnergy > StartingEnergy) { sensorEnergy = StartingEnergy; }
 	}
 	
 	public void OnGUI() {
@@ -59,7 +59,18 @@ public class Ship : MonoBehaviour {
 		}
 	}
 	
-	public bool ActivatePowerCore() {
-		return true;
+	public void PowerupThruster(float amount) {
+		thrusterEnergy += amount;
+		if(thrusterEnergy > StartingEnergy) { thrusterEnergy = StartingEnergy; }
+	}
+	
+	public void PowerupWeapon(float amount) {
+		weaponEnergy += amount;
+		if(weaponEnergy > StartingEnergy) { weaponEnergy = StartingEnergy; }
+	}
+	
+	public void PowerupSensor(float amount) {
+		sensorEnergy += amount;
+		if(sensorEnergy > StartingEnergy) { sensorEnergy = StartingEnergy; }
 	}
 }
