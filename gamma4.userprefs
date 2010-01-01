@@ -3,13 +3,11 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/ObjectSpawner.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/Ship.cs" ctype="Workbench">
     <Files>
-      <File FileName="Assets/src/Ship.cs" Line="46" Column="1" />
-      <File FileName="Assets/src/Thruster.cs" Line="24" Column="2" />
-      <File FileName="Assets/src/Weapon.cs" Line="16" Column="12" />
-      <File FileName="Assets/src/Asteroid.cs" Line="7" Column="16" />
-      <File FileName="Assets/src/ObjectSpawner.cs" Line="13" Column="1" />
+      <File FileName="Assets/src/Ship.cs" Line="49" Column="48" />
+      <File FileName="Assets/src/Thruster.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/Weapon.cs" Line="34" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,7 +15,7 @@
           <Node name="gamma4" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="src" expanded="True">
-                <Node name="ObjectSpawner.cs" selected="True" />
+                <Node name="Ship.cs" selected="True" />
               </Node>
             </Node>
           </Node>

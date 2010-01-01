@@ -15,14 +15,14 @@ public class Weapon : MonoBehaviour {
 			
 			missile = (GameObject)Instantiate(Missile);
 			missile.transform.rotation = transform.rotation;
-			missile.transform.Rotate(new Vector3(15, 0, 0));
+			missile.transform.Rotate(new Vector3(7, 0, 0));
 			missile.transform.position = transform.position + (missile.transform.up * 2);
 			missile.rigidbody.AddForce(missile.transform.up * missile.GetComponent<Missile>().ThrustForce);
 			missile.transform.rigidbody.angularVelocity += transform.rigidbody.angularVelocity;
 			
 			missile = (GameObject)Instantiate(Missile);
 			missile.transform.rotation = transform.rotation;
-			missile.transform.Rotate(new Vector3(-15, 0, 0));
+			missile.transform.Rotate(new Vector3(-7, 0, 0));
 			missile.transform.position = transform.position + (missile.transform.up * 2);
 			missile.rigidbody.AddForce(missile.transform.up * missile.GetComponent<Missile>().ThrustForce);
 			missile.transform.rigidbody.angularVelocity += transform.rigidbody.angularVelocity;

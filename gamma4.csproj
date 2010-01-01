@@ -52,6 +52,7 @@
      <Compile Include="Assets\src\Game.cs" />
      <Compile Include="Assets\src\Missile.cs" />
      <Compile Include="Assets\src\ObjectSpawner.cs" />
+     <Compile Include="Assets\src\PowerCore.cs" />
      <Compile Include="Assets\src\Ship.cs" />
      <Compile Include="Assets\src\StationRotation.cs" />
      <Compile Include="Assets\src\Thruster.cs" />
