@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class Thruster : MonoBehaviour {
-	public float ThrustForce = 10.0f;
+	public float ThrustForce = 1000.0f;
 	public Ship ShipBehaviour;
 	
 	private bool thrust;
 	
 	public void Update() {
-		if(Input.GetButton("Thruster") && ShipBehaviour.ActivateThruster(Time.deltaTime)) {
+		if(Input.GetButton("Thruster")) { // && ShipBehaviour.ActivateThruster(Time.deltaTime)) {
 			thrust = true;		
 		}
 		else {
@@ -18,7 +18,7 @@ public class Thruster : MonoBehaviour {
 	
 	public void FixedUpdate () {
 		if(thrust) {
-			rigidbody.AddForce(-transform.up * ThrustForce * Time.deltaTime);
+			ShipBehaviour.rigidbody.AddForce(-transform.forward * ThrustForce * Time.deltaTime);
 		}
 	}
 }

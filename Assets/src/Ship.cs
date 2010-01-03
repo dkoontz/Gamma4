@@ -4,8 +4,7 @@ using System.Collections;
 public class Ship : MonoBehaviour {
 
 	public float StartingEnergy = 100;
-//	public float EnergyRechargePerSecond = 2;
-	public float ThrusterEnergyUsePerSecond = 100;
+	public float ThrusterEnergyUsePerSecond = 50;
 	public float MissileEnergyUsePerShot = 25;
 	public Texture ThrusterIcon;
 	public Texture WeaponIcon;
@@ -18,16 +17,6 @@ public class Ship : MonoBehaviour {
 		thrusterEnergy = StartingEnergy;
 		weaponEnergy = StartingEnergy;
 		sensorEnergy = StartingEnergy;
-	}
-	
-	public void Update () {
-//		thrusterEnergy += EnergyRechargePerSecond * Time.deltaTime;
-//		weaponEnergy += EnergyRechargePerSecond * Time.deltaTime;
-//		sensorEnergy += EnergyRechargePerSecond * Time.deltaTime;
-		
-//		if(thrusterEnergy > StartingEnergy) { thrusterEnergy = StartingEnergy; }
-//		if(weaponEnergy > StartingEnergy) { weaponEnergy = StartingEnergy; }
-//		if(sensorEnergy > StartingEnergy) { sensorEnergy = StartingEnergy; }
 	}
 	
 	public void OnGUI() {

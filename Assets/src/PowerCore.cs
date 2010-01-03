@@ -2,10 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class PowerCore : MonoBehaviour {
-	public float DefaultEnergyRecharge = 1;
-	public float ThrusterEnergyRecharge = 10;
-	public float WeaponEnergyRecharge = 10;
-	public float SensorEnergyRecharge = 10;
+	public float DefaultEnergyRecharge = 5;
+	public float ThrusterEnergyRecharge = 15;
+	public float WeaponEnergyRecharge = 15;
+	public float SensorEnergyRecharge = 15;
 	
 	public Ship ShipBehaviour;
 	public float MarkerCycleTime = 2;
@@ -18,11 +18,13 @@ public class PowerCore : MonoBehaviour {
 	private float markerEnd = 543;
 	private bool specialtyPowerupChosen;
 	
+	private const float OFFSCREEN = -100;
+	
 	private Rect powerCoreBackgroundRect = new Rect(50, 425, 500, 20);
-	private Rect thrusterIconRect = new Rect(0, 427, 16, 16);
-	private Rect weaponIconRect = new Rect(0, 427, 16, 16);
-	private Rect sensorIconRect = new Rect(0, 427, 16, 16);
-	private Rect powerCoreMarkerRect = new Rect(0, 425, 7, 20);
+	private Rect thrusterIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	private Rect weaponIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	private Rect sensorIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	private Rect powerCoreMarkerRect = new Rect(OFFSCREEN, 425, 7, 20);
 	
 	public void Start() {
 		ResetTrack();
@@ -78,8 +80,8 @@ public class PowerCore : MonoBehaviour {
 	}
 	
 	void VoidTrack() {
-		thrusterIconRect.x = -100;
-		weaponIconRect.x = -100;
+		thrusterIconRect.x = OFFSCREEN;
+		weaponIconRect.x = OFFSCREEN;
 	}
 	
 	bool Overlapping(Rect marker, Rect icon) {
