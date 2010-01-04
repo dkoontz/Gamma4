@@ -8,7 +8,7 @@ public class Thruster : MonoBehaviour {
 	private bool thrust;
 	
 	public void Update() {
-		if(Input.GetButton("Thruster")) { // && ShipBehaviour.ActivateThruster(Time.deltaTime)) {
+		if(Input.GetButton("Thruster") && ShipBehaviour.ActivateThruster(Time.deltaTime)) {
 			thrust = true;		
 		}
 		else {

@@ -3,20 +3,14 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/PowerCore.cs" ctype="Workbench">
-    <Files>
-      <File FileName="Assets/src/Ship.cs" Line="72" Column="27" />
-      <File FileName="Assets/src/Thruster.cs" Line="1" Column="1" />
-      <File FileName="Assets/src/Weapon.cs" Line="9" Column="35" />
-      <File FileName="Assets/src/PowerCore.cs" Line="21" Column="2" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="gamma4" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="src" expanded="True">
-                <Node name="PowerCore.cs" selected="True" />
+                <Node name="Ship.cs" selected="True" />
               </Node>
             </Node>
           </Node>

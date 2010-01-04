@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour {
 	public Ship ShipBehaviour;
 	
 	public void Update() {
-		if(Input.GetButtonDown("Weapon")) { // && ShipBehaviour.ActivateWeapon()) {
+		if(Input.GetButtonDown("Weapon") && ShipBehaviour.ActivateWeapon()) {
 			var missile = (GameObject)Instantiate(Missile);
 			missile.transform.rotation = transform.rotation;
 			missile.transform.position = ShipBehaviour.transform.position + (transform.forward * 12);
