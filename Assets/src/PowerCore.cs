@@ -8,27 +8,28 @@ public class PowerCore : MonoBehaviour {
 	public float SensorEnergyRecharge = 25;
 	public float ShieldEnergyRecharge = 25;
 	
-	public Ship ShipBehaviour;
 	public float MarkerCycleTime = 2;
 	public Texture PowerCoreBackground;
 	public Texture PowerCoreMarker;
 	
-	private float startTime;
-	private float endTime;
-	private float markerStart = 50;
-	private float markerEnd = 543;
-	private bool specialtyPowerupChosen;
+	float startTime;
+	float endTime;
+	float markerStart = 50;
+	float markerEnd = 543;
+	bool specialtyPowerupChosen;
 	
-	private const float OFFSCREEN = -100;
+	const float OFFSCREEN = -100;
 	
-	private Rect powerCoreBackgroundRect = new Rect(50, 425, 500, 20);
-	private Rect thrusterIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	private Rect weaponIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	private Rect sensorIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	private Rect shieldIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	private Rect powerCoreMarkerRect = new Rect(OFFSCREEN, 425, 7, 20);
+	Rect powerCoreBackgroundRect = new Rect(50, 425, 500, 20);
+	Rect thrusterIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	Rect weaponIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	Rect sensorIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	Rect shieldIconRect = new Rect(OFFSCREEN, 427, 16, 16);
+	Rect powerCoreMarkerRect = new Rect(OFFSCREEN, 425, 7, 20);
+	Ship ShipBehaviour;
 	
 	public void Start() {
+		ShipBehaviour = GetComponent<Ship>();
 		ResetTrack();
 	}
 	

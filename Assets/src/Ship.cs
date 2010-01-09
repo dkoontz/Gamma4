@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Ship : MonoBehaviour {
 
 	public float StartingEnergy = 100;
 	public float ThrusterEnergyUsePerSecond = 50;
 	public float MissileEnergyUsePerShot = 25;
+	public float RespawnTime = 5.0f;
 	public Texture ThrusterIcon;
 	public Texture WeaponIcon;
 	public Texture SensorIcon;
@@ -14,7 +16,8 @@ public class Ship : MonoBehaviour {
 	float thrusterEnergy;
 	float weaponEnergy;
 	float sensorEnergy;
-	float shieldEnergy = 100;
+	float shieldEnergy;
+	bool respawning = false;
 	
 	Rect thrusterIconRect = new Rect(5, 5, 32, 32);
 	Rect thrusterTextRect = new Rect(40, 12, 100, 25);
@@ -26,9 +29,7 @@ public class Ship : MonoBehaviour {
 	Rect shieldTextRect = new Rect(40, 108, 100, 25);
 	
 	public void Start() {
-		thrusterEnergy = StartingEnergy;
-		weaponEnergy = StartingEnergy;
-		sensorEnergy = StartingEnergy;
+		ResetPower();
 	}
 	
 	public void OnGUI() {
@@ -84,9 +85,55 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public void Damage(float damageAmount) {
-		shieldEnergy -= damageAmount;
-		if(shieldEnergy <= 0) {
-			//destroyed & respawn
+		if(!respawning) {
+			shieldEnergy -= damageAmount;
+			if(shieldEnergy <= 0) {
+				StartCoroutine(DestroyAndRespawn(RespawnTime));
+			}
 		}
+	}
+	
+	IEnumerator DestroyAndRespawn(float delayTime) {
+		respawning = true;
+		var emitters = GetComponentsInChildren<ParticleEmitter>();
+		foreach(var e in emitters) {
+			Debug.Log(e.name);
+			if("Ship Explosion" == e.name) {
+				e.emit = true;
+			}
+			else if("Power Core" == e.name) {
+				e.emit = false;
+			}
+		}
+
+		yield return new WaitForSeconds(RespawnTime);
+	
+		foreach(var e in emitters) {
+			if("Ship Explosion" == e.name) {
+				e.emit = false;
+			}
+			else if("Power Core" == e.name) {
+				e.emit = true;
+			}
+		}
+		
+		Respawn();
+		respawning = false;
+	}
+	
+	void Respawn() {
+		transform.position = new Vector3(0, 0, 0);
+		
+		GetComponentInChildren<FaceHeadingOfParent>().gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+		transform.rigidbody.velocity = new Vector3(0, 0, 0);
+		transform.rigidbody.angularVelocity = new Vector3(0, 0, 0);
+		ResetPower();
+	}
+	
+	void ResetPower() {
+		thrusterEnergy = StartingEnergy;
+		weaponEnergy = StartingEnergy;
+		sensorEnergy = StartingEnergy;
+		shieldEnergy = 100;
 	}
 }
