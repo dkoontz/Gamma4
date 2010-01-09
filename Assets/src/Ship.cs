@@ -7,7 +7,7 @@ public class Ship : MonoBehaviour {
 	public float StartingEnergy = 100;
 	public float ThrusterEnergyUsePerSecond = 50;
 	public float MissileEnergyUsePerShot = 25;
-	public float RespawnTime = 5.0f;
+	public float RespawnTime = 3;
 	public Texture ThrusterIcon;
 	public Texture WeaponIcon;
 	public Texture SensorIcon;
@@ -42,6 +42,11 @@ public class Ship : MonoBehaviour {
 		GUI.DrawTexture(shieldIconRect, ShieldIcon);
 		GUI.Label(shieldTextRect, string.Format("{0:f}", shieldEnergy));
 	}
+	
+	public void FixedUpdate() {
+		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+	}
+	
 	
 	public bool ActivateThruster(float durationInSeconds) {
 		var energyUse = ThrusterEnergyUsePerSecond * durationInSeconds;

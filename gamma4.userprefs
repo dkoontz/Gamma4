@@ -3,7 +3,12 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/Ship.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Assets/src/Ship.cs" Line="10" Column="30" />
+      <File FileName="Assets/src/PowerCore.cs" Line="32" Column="36" />
+      <File FileName="Assets/src/Game.cs" Line="15" Column="6" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
