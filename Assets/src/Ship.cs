@@ -6,12 +6,14 @@ public class Ship : MonoBehaviour {
 
 	public float StartingEnergy = 100;
 	public float ThrusterEnergyUsePerSecond = 50;
-	public float MissileEnergyUsePerShot = 25;
+	public float WeaponEnergyUsePerSecond = 80;
 	public float RespawnTime = 3;
 	public Texture ThrusterIcon;
 	public Texture WeaponIcon;
 	public Texture SensorIcon;
 	public Texture ShieldIcon;
+	
+	public bool Firing {get; set;}
 		
 	float thrusterEnergy;
 	float weaponEnergy;
@@ -21,14 +23,15 @@ public class Ship : MonoBehaviour {
 	
 	Rect thrusterIconRect = new Rect(5, 5, 32, 32);
 	Rect thrusterTextRect = new Rect(40, 12, 100, 25);
-	Rect weaponIconRect = new Rect(5, 35, 32, 32);
-	Rect weaponTextRect = new Rect(40, 42, 100, 25);
-	Rect sensorIconRect = new Rect(5, 65, 32, 32);
-	Rect sensorTextRect = new Rect(40, 70, 100, 25);
-	Rect shieldIconRect = new Rect(5, 100, 32, 32);
-	Rect shieldTextRect = new Rect(40, 108, 100, 25);
+	Rect weaponIconRect = new Rect(5, 40, 32, 32);
+	Rect weaponTextRect = new Rect(40, 47, 100, 25);
+	Rect sensorIconRect = new Rect(5, 75, 32, 32);
+	Rect sensorTextRect = new Rect(40, 82, 100, 25);
+	Rect shieldIconRect = new Rect(5, 110, 32, 32);
+	Rect shieldTextRect = new Rect(40, 117, 100, 25);
 	
 	public void Start() {
+		Firing = false;
 		ResetPower();
 	}
 	
@@ -59,9 +62,10 @@ public class Ship : MonoBehaviour {
 		}
 	}
 	
-	public bool ActivateWeapon() {
-		if(weaponEnergy >= MissileEnergyUsePerShot) {
-			weaponEnergy -= MissileEnergyUsePerShot;
+	public bool ActivateWeapon(float durationInSeconds) {
+		var energyUse = WeaponEnergyUsePerSecond * durationInSeconds;
+		if(weaponEnergy >= energyUse) {
+			weaponEnergy -= energyUse;
 			return true;
 		}
 		else {
@@ -102,7 +106,6 @@ public class Ship : MonoBehaviour {
 		respawning = true;
 		var emitters = GetComponentsInChildren<ParticleEmitter>();
 		foreach(var e in emitters) {
-			Debug.Log(e.name);
 			if("Ship Explosion" == e.name) {
 				e.emit = true;
 			}

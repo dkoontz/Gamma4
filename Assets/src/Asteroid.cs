@@ -3,17 +3,23 @@ using System.Collections;
 
 public class Asteroid : MonoBehaviour {
 	public float LifespanInSeconds = 45;
-	public float Damage = 50;
+	public float Damage = 40;
 	
 	public void Start() {
 		StartCoroutine(Cleanup(LifespanInSeconds));
 	}
 	
 	public void OnTriggerEnter(Collider other) {
-		if("Ship" == other.tag) {
-			other.GetComponent<Ship>().Damage(Damage);
+		if("Weapon" == other.tag && other.transform.parent.parent.gameObject.GetComponent<Ship>().Firing) {
+			Destroy(gameObject);
 		}
-		Destroy(gameObject);
+	}
+	
+	public void OnCollisionEnter(Collision other) {
+		if("Ship" == other.gameObject.tag) {
+			other.transform.parent.gameObject.GetComponent<Ship>().Damage(Damage);
+			Destroy(gameObject);
+		}
 	}
 	
 	IEnumerator Cleanup(float timeToLive) {
