@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour {
 	
 	public void Start () {
 		StartCoroutine(Cleanup(LifespanInSeconds));
+		rigidbody.AddForce(transform.forward * ThrustForce);
 	}
 	
 	public void OnTriggerEnter() {
