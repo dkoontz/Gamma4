@@ -51,6 +51,7 @@
      <Compile Include="Assets\src\FaceHeadingOfParent.cs" />
      <Compile Include="Assets\src\Game.cs" />
      <Compile Include="Assets\src\Missile.cs" />
+     <Compile Include="Assets\src\MissileTurret.cs" />
      <Compile Include="Assets\src\ObjectSpawner.cs" />
      <Compile Include="Assets\src\PowerCore.cs" />
      <Compile Include="Assets\src\Ship.cs" />

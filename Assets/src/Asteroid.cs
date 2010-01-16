@@ -24,12 +24,10 @@ public class Asteroid : MonoBehaviour {
 	
 	public void OnCollisionEnter(Collision other) {
 		if("Ship" == other.gameObject.tag) {
+			other.gameObject.GetComponent<Ship>().Damage(Damage);
 			other.transform.parent.gameObject.GetComponent<Ship>().Damage(Damage);
-			Destroy(gameObject);
 		}
-		else if("Asteroid" == other.gameObject.tag) {
-			Destroy(gameObject);
-		}
+		Destroy(gameObject);
 	}
 	
 	IEnumerator Cleanup(float timeToLive) {

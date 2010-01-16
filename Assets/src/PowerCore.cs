@@ -66,7 +66,7 @@ public class PowerCore : MonoBehaviour {
 				ShipBehaviour.PowerupThruster(DefaultEnergyRecharge);
 				ShipBehaviour.PowerupWeapon(DefaultEnergyRecharge);
 				ShipBehaviour.PowerupSensor(DefaultEnergyRecharge);
-				ShipBehaviour.PowerupShield(DefaultEnergyRecharge);
+				ShipBehaviour.PowerupShield(DefaultEnergyRecharge / 2);
 			}
 			ResetTrack();
 			var temp = markerEnd;

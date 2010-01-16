@@ -20,6 +20,7 @@ public class Ship : MonoBehaviour {
 	float sensorEnergy;
 	float shieldEnergy;
 	bool respawning = false;
+	float originalYPosition;
 	
 	Rect thrusterIconRect = new Rect(5, 5, 32, 32);
 	Rect thrusterTextRect = new Rect(40, 12, 100, 25);
@@ -31,6 +32,7 @@ public class Ship : MonoBehaviour {
 	Rect shieldTextRect = new Rect(40, 117, 100, 25);
 	
 	public void Start() {
+		originalYPosition = transform.position.y;
 		Firing = false;
 		ResetPower();
 	}
@@ -47,7 +49,7 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public void FixedUpdate() {
-		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+		transform.position = new Vector3(transform.position.x, originalYPosition, transform.position.z);
 	}
 	
 	
@@ -130,7 +132,7 @@ public class Ship : MonoBehaviour {
 	}
 	
 	void Respawn() {
-		transform.position = new Vector3(0, 0, 0);
+		transform.position = new Vector3(0, originalYPosition, 0);
 		
 		GetComponentInChildren<FaceHeadingOfParent>().gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 		transform.rigidbody.velocity = new Vector3(0, 0, 0);
