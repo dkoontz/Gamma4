@@ -11,11 +11,16 @@ public class PowerCore : MonoBehaviour {
 	public float MarkerCycleTime = 2;
 	public Texture PowerCoreBackground;
 	public Texture PowerCoreMarker;
+	public ParticleEmitter SuccessVisualIndicator;
 	
 	float startTime;
 	float endTime;
 	float markerStart = 50;
 	float markerEnd = 543;
+	float leftMarkerEdge;
+	float backgroundWidth;
+	float backgroundMidpoint;
+	float visualIndicatorEdge = 1.25f;
 	bool specialtyPowerupChosen;
 	
 	const float OFFSCREEN = -100;
@@ -26,38 +31,58 @@ public class PowerCore : MonoBehaviour {
 	Rect sensorIconRect = new Rect(OFFSCREEN, 427, 16, 16);
 	Rect shieldIconRect = new Rect(OFFSCREEN, 427, 16, 16);
 	Rect powerCoreMarkerRect = new Rect(OFFSCREEN, 425, 7, 20);
+	Rect powerCoreCollisionRect = new Rect(OFFSCREEN, 425, 11, 20);
+	float COLLISION_RECT_X_OFFSET = 5;
 	Ship ShipBehaviour;
 	
 	public void Start() {
+		leftMarkerEdge = markerStart;
+		backgroundWidth = markerEnd - markerStart;
+		backgroundMidpoint = backgroundWidth / 2;
 		ShipBehaviour = GetComponent<Ship>();
 		ResetTrack();
 	}
 	
 	public void Update() {
 		powerCoreMarkerRect.x = Mathf.Lerp(markerStart, markerEnd, (Time.time - startTime) / MarkerCycleTime);
-		
+		powerCoreCollisionRect = powerCoreMarkerRect;
+		powerCoreCollisionRect.x -= COLLISION_RECT_X_OFFSET;
+
 		if(Input.GetButtonDown("PowerCore")) {
 			specialtyPowerupChosen = true;
+			var hitSomething = false;
 
-			if(Overlapping(powerCoreMarkerRect, thrusterIconRect)) {
+			if(Overlapping(powerCoreCollisionRect, thrusterIconRect)) {
 				ShipBehaviour.PowerupThruster(ThrusterEnergyRecharge);
 				VoidTrack();
+				hitSomething = true;
 			}
-			else if(Overlapping(powerCoreMarkerRect, weaponIconRect)) {
+			else if(Overlapping(powerCoreCollisionRect, weaponIconRect)) {
 				ShipBehaviour.PowerupWeapon(WeaponEnergyRecharge);
 				VoidTrack();
+				hitSomething = true;
 			}
-			else if(Overlapping(powerCoreMarkerRect, sensorIconRect)) {
+			else if(Overlapping(powerCoreCollisionRect, sensorIconRect)) {
 				ShipBehaviour.PowerupSensor(SensorEnergyRecharge);
 				VoidTrack();
+				hitSomething = true;
 			}
-			else if(Overlapping(powerCoreMarkerRect, shieldIconRect)) {
+			else if(Overlapping(powerCoreCollisionRect, shieldIconRect)) {
 				ShipBehaviour.PowerupShield(ShieldEnergyRecharge);
 				VoidTrack();
+				hitSomething = true;
 			}
 			else {
 				specialtyPowerupChosen = false;
 				VoidTrack();
+			}
+			
+			if(hitSomething) {
+				float locationPercentage = ((powerCoreMarkerRect.x - leftMarkerEdge) / backgroundWidth * 2) - 1;
+				Debug.Log(locationPercentage);
+				Vector3 pos = new Vector3(locationPercentage * visualIndicatorEdge, -1, 2);
+				SuccessVisualIndicator.gameObject.transform.localPosition = pos;
+				SuccessVisualIndicator.Emit(5);
 			}
 		}
 		
