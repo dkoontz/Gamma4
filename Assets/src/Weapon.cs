@@ -4,6 +4,7 @@ using System.Collections;
 public class Weapon : MonoBehaviour {
 	public Ship ShipBehaviour;
 	public GameObject Laser;
+	public ParticleEmitter LaserBurnEffect;
 	
 	const float BEAM_LENGTH = 20.5f;
 	float mining_laser_scale;
@@ -19,6 +20,7 @@ public class Weapon : MonoBehaviour {
 		beam.GetComponent<BoxCollider>().isTrigger = true;
 		Laser.transform.parent = gameObject.transform;
 		mining_laser_scale = beam.transform.parent.localScale.y;
+		LaserBurnEffect.emit = false;
 	}
 	
 	public void Update() {
@@ -38,11 +40,17 @@ public class Weapon : MonoBehaviour {
 				beam.transform.parent.localScale = new Vector3(scale.x, (hitInfo.distance / BEAM_LENGTH) * mining_laser_scale, scale.z);
 //				Debug.Log("Raycast hit: " + hitInfo.transform.gameObject.name + ", distance; " + hitInfo.distance +
 //				          ", %: " + hitInfo.distance / BEAM_LENGTH + " of " + mining_laser_scale + " is: " + (hitInfo.distance / BEAM_LENGTH) * mining_laser_scale);
+				LaserBurnEffect.gameObject.transform.position = hitInfo.point;
+				LaserBurnEffect.emit = true;
+			}
+			else {
+				LaserBurnEffect.emit = false;
 			}
 		}
 		else {
 			beam.GetComponent<MeshRenderer>().enabled = false;
 			ShipBehaviour.Firing = false;
+			LaserBurnEffect.emit = false;
 		}
 	}
 }
