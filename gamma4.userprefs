@@ -3,16 +3,10 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/PowerCore.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/PowerCell.cs" ctype="Workbench">
     <Files>
-      <File FileName="Assets/src/ObjectSpawner.cs" Line="29" Column="4" />
-      <File FileName="Assets/src/Asteroid.cs" Line="19" Column="29" />
-      <File FileName="Assets/src/Game.cs" Line="7" Column="9" />
-      <File FileName="Assets/src/Missile.cs" Line="24" Column="23" />
-      <File FileName="Assets/src/MissileTurret.cs" Line="59" Column="46" />
-      <File FileName="Assets/src/Ship.cs" Line="23" Column="26" />
-      <File FileName="Assets/src/Weapon.cs" Line="24" Column="6" />
-      <File FileName="Assets/src/PowerCore.cs" Line="69" Column="60" />
+      <File FileName="Assets/src/PowerCell.cs" Line="6" Column="40" />
+      <File FileName="Assets/src/PowerCore.cs" Line="39" Column="45" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,7 +14,7 @@
           <Node name="gamma4" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="src" expanded="True">
-                <Node name="PowerCore.cs" selected="True" />
+                <Node name="PowerCell.cs" selected="True" />
               </Node>
             </Node>
           </Node>

@@ -21,6 +21,7 @@ public class Ship : MonoBehaviour {
 	float shieldEnergy;
 	bool respawning = false;
 	float originalYPosition;
+	GameObject respawn;
 	
 	Rect thrusterIconRect = new Rect(5, 5, 32, 32);
 	Rect thrusterTextRect = new Rect(40, 12, 100, 25);
@@ -104,6 +105,10 @@ public class Ship : MonoBehaviour {
 		}
 	}
 	
+	public void SetNextRespawn(GameObject respawn) {
+		this.respawn = respawn;
+	}
+	
 	IEnumerator DestroyAndRespawn(float delayTime) {
 		respawning = true;
 		var emitters = GetComponentsInChildren<ParticleEmitter>();
@@ -132,9 +137,9 @@ public class Ship : MonoBehaviour {
 	}
 	
 	void Respawn() {
-		transform.position = new Vector3(0, originalYPosition, 0);
+		transform.position = respawn.transform.position;
 		
-		GetComponentInChildren<FaceHeadingOfParent>().gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+//		GetComponentInChildren<FaceHeadingOfParent>().gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 		transform.rigidbody.velocity = new Vector3(0, 0, 0);
 		transform.rigidbody.angularVelocity = new Vector3(0, 0, 0);
 		ResetPower();

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>9.0.21022</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{A45ED5F0-96C9-A270-CA00-93C15567D020}</ProjectGuid>
+	<ProjectGuid>{DE6407A2-B838-458C-5171-5E2E60371E45}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace>Irrelevant</RootNamespace>
@@ -50,10 +50,12 @@
      <Compile Include="Assets\src\Asteroid.cs" />
      <Compile Include="Assets\src\FaceHeadingOfParent.cs" />
      <Compile Include="Assets\src\Game.cs" />
+     <Compile Include="Assets\src\GatePowerCell.cs" />
      <Compile Include="Assets\src\Missile.cs" />
      <Compile Include="Assets\src\MissileTurret.cs" />
      <Compile Include="Assets\src\ObjectSpawner.cs" />
      <Compile Include="Assets\src\PowerCore.cs" />
+     <Compile Include="Assets\src\Respawn.cs" />
      <Compile Include="Assets\src\Ship.cs" />
      <Compile Include="Assets\src\StationRotation.cs" />
      <Compile Include="Assets\src\Thruster.cs" />

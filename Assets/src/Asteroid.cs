@@ -6,7 +6,13 @@ public class Asteroid : MonoBehaviour {
 	public float LifespanInSeconds = 45;
 	public float Damage = 40;
 	
+	private static Ship ship;
+	
 	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
+		
 		if(FixedLifespan) {
 			StartCoroutine(Cleanup(LifespanInSeconds));
 		}
@@ -17,15 +23,14 @@ public class Asteroid : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider other) {
-		if("Weapon" == other.tag && other.transform.parent.parent.gameObject.GetComponent<Ship>().Firing) {
+		if("Weapon" == other.tag && ship.Firing) {
 			Destroy(gameObject);
 		}
 	}
 	
 	public void OnCollisionEnter(Collision other) {
 		if("Ship" == other.gameObject.tag) {
-			other.gameObject.GetComponent<Ship>().Damage(Damage);
-			other.transform.parent.gameObject.GetComponent<Ship>().Damage(Damage);
+			ship.Damage(Damage);
 		}
 		Destroy(gameObject);
 	}

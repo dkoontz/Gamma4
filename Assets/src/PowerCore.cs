@@ -19,7 +19,6 @@ public class PowerCore : MonoBehaviour {
 	float markerEnd = 543;
 	float leftMarkerEdge;
 	float backgroundWidth;
-	float backgroundMidpoint;
 	float visualIndicatorEdge = 1.25f;
 	bool specialtyPowerupChosen;
 	
@@ -38,7 +37,6 @@ public class PowerCore : MonoBehaviour {
 	public void Start() {
 		leftMarkerEdge = markerStart;
 		backgroundWidth = markerEnd - markerStart;
-		backgroundMidpoint = backgroundWidth / 2;
 		ShipBehaviour = GetComponent<Ship>();
 		ResetTrack();
 	}

@@ -5,44 +5,43 @@ public class Weapon : MonoBehaviour {
 	public Ship ShipBehaviour;
 	public GameObject Laser;
 	
+	const float BEAM_LENGTH = 20.5f;
+	float mining_laser_scale;
+	GameObject beam;
+	int laser_raycast_mask;
+	
 	public void Start() {
+		
+		laser_raycast_mask = (1 << LayerMask.NameToLayer("Turrets")) + (1 << LayerMask.NameToLayer("Ignore Raycast"));
+		Debug.Log(laser_raycast_mask);
+		beam = Laser.transform.Find("Beam").gameObject;
+		beam.GetComponent<MeshRenderer>().enabled = false;
+		beam.GetComponent<BoxCollider>().isTrigger = true;
 		Laser.transform.parent = gameObject.transform;
-		Laser.GetComponent<MeshRenderer>().enabled = false;
-		Laser.GetComponent<CapsuleCollider>().isTrigger = true;
+		mining_laser_scale = beam.transform.parent.localScale.y;
 	}
 	
 	public void Update() {
-		if(Input.GetButton("Weapon") && ShipBehaviour.ActivateWeapon(Time.deltaTime)) {
-			Laser.GetComponent<MeshRenderer>().enabled = true;
+		
+		if(Input.GetButton("Weapon")) { // && ShipBehaviour.ActivateWeapon(Time.deltaTime)) {
+			beam.GetComponent<MeshRenderer>().enabled = true;
 			ShipBehaviour.Firing = true;
 			
-			
-			
-//			var missile = (GameObject)Instantiate(Missile);
-//			missile.transform.rotation = transform.rotation;
-//			missile.transform.position = ShipBehaviour.transform.position + (transform.forward * 12);
-//			missile.transform.Rotate(new Vector3(90, 0, 0));
-//			missile.rigidbody.AddForce(missile.transform.up * missile.GetComponent<Missile>().ThrustForce);
-//			missile.transform.rigidbody.angularVelocity += ShipBehaviour.rigidbody.angularVelocity;
-//
-//			missile = (GameObject)Instantiate(Missile);
-//			missile.transform.rotation = transform.rotation;
-//			missile.transform.Rotate(new Vector3(0, 3, 0));
-//			missile.transform.position = ShipBehaviour.transform.position + (missile.transform.forward * 12);
-//			missile.transform.Rotate(new Vector3(90, 0, 0));
-//			missile.rigidbody.AddForce(missile.transform.up * missile.GetComponent<Missile>().ThrustForce);
-//			missile.transform.rigidbody.angularVelocity += ShipBehaviour.rigidbody.angularVelocity;
-//			
-//			missile = (GameObject)Instantiate(Missile);
-//			missile.transform.rotation = transform.rotation;
-//			missile.transform.Rotate(new Vector3(0, -3, 0));
-//			missile.transform.position = ShipBehaviour.transform.position + (missile.transform.forward * 12);
-//			missile.transform.Rotate(new Vector3(90, 0, 0));
-//			missile.rigidbody.AddForce(missile.transform.up * missile.GetComponent<Missile>().ThrustForce);
-//			missile.transform.rigidbody.angularVelocity += ShipBehaviour.rigidbody.angularVelocity;
+			Debug.DrawRay(beam.transform.position, beam.transform.up * BEAM_LENGTH);
+			Debug.DrawRay(beam.transform.position + new Vector3(0, 0.5f, 0), beam.transform.up * BEAM_LENGTH);
+			Debug.DrawRay(beam.transform.position + new Vector3(0, 1f, 0), beam.transform.up * BEAM_LENGTH);
+			RaycastHit hitInfo;
+			if(Physics.Raycast(beam.transform.position, beam.transform.up, out hitInfo, BEAM_LENGTH, ~laser_raycast_mask) || 
+			   Physics.Raycast(beam.transform.position + new Vector3(0, 0.5f, 0), beam.transform.up, out hitInfo, BEAM_LENGTH, ~laser_raycast_mask) ||
+			   Physics.Raycast(beam.transform.position + new Vector3(0, 1f, 0), beam.transform.up, out hitInfo, BEAM_LENGTH, ~laser_raycast_mask)) {
+				var scale = beam.transform.parent.localScale;
+				beam.transform.parent.localScale = new Vector3(scale.x, (hitInfo.distance / BEAM_LENGTH) * mining_laser_scale, scale.z);
+//				Debug.Log("Raycast hit: " + hitInfo.transform.gameObject.name + ", distance; " + hitInfo.distance +
+//				          ", %: " + hitInfo.distance / BEAM_LENGTH + " of " + mining_laser_scale + " is: " + (hitInfo.distance / BEAM_LENGTH) * mining_laser_scale);
+			}
 		}
 		else {
-			Laser.GetComponent<MeshRenderer>().enabled = false;
+			beam.GetComponent<MeshRenderer>().enabled = false;
 			ShipBehaviour.Firing = false;
 		}
 	}

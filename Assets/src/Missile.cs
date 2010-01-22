@@ -6,20 +6,22 @@ public class Missile : MonoBehaviour {
 	public float ThrustForce = 1000;
 	public float Damage = 20;
 	
+	Ship ship;
+	
 	public void Start () {
+		ship = GameObject.Find("Ship").GetComponent<Ship>();
 		StartCoroutine(Cleanup(LifespanInSeconds));
 	}
 	
 	public void OnTriggerEnter(Collider other) {
-		Debug.Log(other.gameObject.name);
-		if("Weapon" == other.tag && other.transform.parent.parent.gameObject.GetComponent<Ship>().Firing) {
+		if("Weapon" == other.tag && ship.Firing) {
 			Destroy(gameObject);
 		}
 	}
 	
 	public void OnCollisionEnter(Collision other) {
 		if("Ship" == other.gameObject.tag) {
-			other.gameObject.GetComponent<Ship>().Damage(Damage);
+			ship.Damage(Damage);
 		}
 		Destroy(gameObject);
 	}
