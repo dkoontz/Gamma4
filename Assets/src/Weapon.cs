@@ -14,7 +14,6 @@ public class Weapon : MonoBehaviour {
 	public void Start() {
 		
 		laser_raycast_mask = (1 << LayerMask.NameToLayer("Turrets")) + (1 << LayerMask.NameToLayer("Ignore Raycast"));
-		Debug.Log(laser_raycast_mask);
 		beam = Laser.transform.Find("Beam").gameObject;
 		beam.GetComponent<MeshRenderer>().enabled = false;
 		beam.GetComponent<BoxCollider>().isTrigger = true;

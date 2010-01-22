@@ -50,6 +50,7 @@
      <Compile Include="Assets\src\Asteroid.cs" />
      <Compile Include="Assets\src\FaceHeadingOfParent.cs" />
      <Compile Include="Assets\src\Game.cs" />
+     <Compile Include="Assets\src\Gate.cs" />
      <Compile Include="Assets\src\GatePowerCell.cs" />
      <Compile Include="Assets\src\Missile.cs" />
      <Compile Include="Assets\src\MissileTurret.cs" />
