@@ -50,6 +50,7 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public void FixedUpdate() {
+		Debug.Log(rigidbody.velocity);
 		transform.position = new Vector3(transform.position.x, originalYPosition, transform.position.z);
 	}
 	
@@ -139,9 +140,9 @@ public class Ship : MonoBehaviour {
 	void Respawn() {
 		transform.position = respawn.transform.position;
 		
-//		GetComponentInChildren<FaceHeadingOfParent>().gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-		transform.rigidbody.velocity = new Vector3(0, 0, 0);
-		transform.rigidbody.angularVelocity = new Vector3(0, 0, 0);
+		transform.Find("Thruster Rotator").rigidbody.velocity = Vector3.zero;
+		transform.Find("Weapon Rotator").rigidbody.velocity = Vector3.zero;
+		transform.rigidbody.velocity = Vector3.zero;
 		ResetPower();
 	}
 	
