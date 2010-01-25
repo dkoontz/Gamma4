@@ -54,6 +54,7 @@
      <Compile Include="Assets\src\GatePowerCell.cs" />
      <Compile Include="Assets\src\Missile.cs" />
      <Compile Include="Assets\src\MissileTurret.cs" />
+     <Compile Include="Assets\src\Navigation.cs" />
      <Compile Include="Assets\src\ObjectSpawner.cs" />
      <Compile Include="Assets\src\PowerCore.cs" />
      <Compile Include="Assets\src\Respawn.cs" />
