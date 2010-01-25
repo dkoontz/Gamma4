@@ -2,29 +2,32 @@ using UnityEngine;
 using System.Collections;
 
 public class Navigation : MonoBehaviour {
-	public Ship ShipBehaviour;
 	public float ScrollSpeedPerSecond = 0.02f;
 	
 	public float MapBottomPositionInWorldspace = -20;
 	public float MapTopPositionInWorldspace = 720;
+	
+	static Ship ship;
 	
 	float mapHeight;
 	float offset = 0;
 	float shipOffset = 0;
 	
 	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
 		mapHeight = MapTopPositionInWorldspace - MapBottomPositionInWorldspace;
 	}
 	
 	public void Update () {
-		// calculate the ship's offset
-		shipOffset = (ShipBehaviour.transform.position.z - MapBottomPositionInWorldspace) / mapHeight;
+		shipOffset = (ship.transform.position.z - MapBottomPositionInWorldspace) / mapHeight;
 		
-		if(Input.GetButton("Sensor") && ShipBehaviour.ActivateSensor(Time.deltaTime)) {
+		if(Input.GetButton("Sensor") && ship.ActivateSensor(Time.deltaTime)) {
 			offset += ScrollSpeedPerSecond * Time.deltaTime;
 		}
 		else {
-			offset -= ScrollSpeedPerSecond * Time.deltaTime * 2;
+			offset -= ScrollSpeedPerSecond * Time.deltaTime * 0.5f;
 			if(offset < shipOffset) {
 				offset = shipOffset;
 			}

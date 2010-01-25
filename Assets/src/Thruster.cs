@@ -3,17 +3,20 @@ using System.Collections;
 
 public class Thruster : MonoBehaviour {
 	public float ThrustForce = 1000.0f;
-	public Ship ShipBehaviour;
 	public GameObject ExhaustTrail;
 	
-	private bool thrust;
+	static Ship ship;
+	bool thrust;
 	
 	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
 		ExhaustTrail.transform.parent = gameObject.transform;
 	}
 	
 	public void Update() {
-		if(Input.GetButton("Thruster") && ShipBehaviour.ActivateThruster(Time.deltaTime)) {
+		if(Input.GetButton("Thruster") && ship.ActivateThruster(Time.deltaTime)) {
 			thrust = true;
 			ExhaustTrail.GetComponent<ParticleEmitter>().emit = true;
 		}
@@ -25,7 +28,7 @@ public class Thruster : MonoBehaviour {
 	
 	public void FixedUpdate () {
 		if(thrust) {
-			ShipBehaviour.rigidbody.AddForce(-transform.forward * ThrustForce * Time.deltaTime);
+			ship.rigidbody.AddForce(-transform.forward * ThrustForce * Time.deltaTime);
 		}
 	}
 }

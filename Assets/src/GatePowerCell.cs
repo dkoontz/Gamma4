@@ -8,13 +8,16 @@ public class GatePowerCell : MonoBehaviour {
 	float powerLevel = 0;
 	ParticleEmitter activeIndicator;
 	bool activated = false;
-	Ship ship;
+	static Ship ship;
 
 	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
+		
 		SetTransparency(0.2f);
 		activeIndicator = transform.Find("Active Indicator").GetComponent<ParticleEmitter>();
 		activeIndicator.emit = false;
-		ship = GameObject.Find("Ship").GetComponent<Ship>();
 	}
 	
 	public void OnTriggerStay(Collider other) {

@@ -2,16 +2,21 @@ using UnityEngine;
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
-	public Ship ShipBehaviour;
 	public GameObject Laser;
 	public ParticleEmitter LaserBurnEffect;
+	
+	static Ship ship;
 	
 	const float BEAM_LENGTH = 20.5f;
 	float mining_laser_scale;
 	GameObject beam;
 	int laser_raycast_mask;
 	
+	
 	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
 		
 		laser_raycast_mask = (1 << LayerMask.NameToLayer("Turrets")) + (1 << LayerMask.NameToLayer("Ignore Raycast"));
 		beam = Laser.transform.Find("Beam").gameObject;
@@ -24,9 +29,9 @@ public class Weapon : MonoBehaviour {
 	
 	public void Update() {
 		
-		if(Input.GetButton("Weapon") && ShipBehaviour.ActivateWeapon(Time.deltaTime)) {
+		if(Input.GetButton("Weapon") && ship.ActivateWeapon(Time.deltaTime)) {
 			beam.GetComponent<MeshRenderer>().enabled = true;
-			ShipBehaviour.Firing = true;
+			ship.Firing = true;
 			
 			Debug.DrawRay(beam.transform.position, beam.transform.up * BEAM_LENGTH);
 			Debug.DrawRay(beam.transform.position + new Vector3(0, 0.5f, 0), beam.transform.up * BEAM_LENGTH);
@@ -48,7 +53,7 @@ public class Weapon : MonoBehaviour {
 		}
 		else {
 			beam.GetComponent<MeshRenderer>().enabled = false;
-			ShipBehaviour.Firing = false;
+			ship.Firing = false;
 			LaserBurnEffect.emit = false;
 		}
 	}

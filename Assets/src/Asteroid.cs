@@ -6,7 +6,7 @@ public class Asteroid : MonoBehaviour {
 	public float LifespanInSeconds = 45;
 	public float Damage = 40;
 	
-	private static Ship ship;
+	static Ship ship;
 	
 	public void Start() {
 		if(null == ship) {
@@ -23,12 +23,14 @@ public class Asteroid : MonoBehaviour {
 	}
 	
 	public void OnTriggerEnter(Collider other) {
-		if("Weapon" == other.tag && ship.Firing) {
+//		Debug.Log("Triggered by: " + other.gameObject.name);
+		if(("Weapon" == other.tag && ship.Firing) || "Respawn Point 1" == other.tag) {
 			Destroy(gameObject);
 		}
 	}
 	
 	public void OnCollisionEnter(Collision other) {
+//		Debug.Log("Collided by: " + other.gameObject.name);
 		if("Ship" == other.gameObject.tag) {
 			ship.Damage(Damage);
 		}

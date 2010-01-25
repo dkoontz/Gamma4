@@ -6,10 +6,13 @@ public class Missile : MonoBehaviour {
 	public float ThrustForce = 1000;
 	public float Damage = 20;
 	
-	Ship ship;
+	static Ship ship;
 	
-	public void Start () {
-		ship = GameObject.Find("Ship").GetComponent<Ship>();
+	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
+		
 		StartCoroutine(Cleanup(LifespanInSeconds));
 	}
 	

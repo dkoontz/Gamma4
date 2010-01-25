@@ -6,6 +6,7 @@ public class ObjectSpawner : MonoBehaviour {
 
 	public GameObject Particle;
 	public bool OneShot = false;
+	public Vector3 RandomRotation = new Vector3(0, 0, 0);
 	
 	ParticleEmitter emitter;
 	
@@ -22,6 +23,9 @@ public class ObjectSpawner : MonoBehaviour {
 			go.transform.position = particle.position;
 			go.transform.LookAt(particle.position + particle.velocity);
 			go.rigidbody.velocity = particle.velocity;
+			go.rigidbody.rotation = Quaternion.Euler(Random.Range(-RandomRotation.x, RandomRotation.x),
+			                                         Random.Range(-RandomRotation.y, RandomRotation.y),
+			                                         Random.Range(-RandomRotation.z, RandomRotation.z));
 		}
 		
 		if(OneShot) {

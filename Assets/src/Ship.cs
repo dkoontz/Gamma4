@@ -51,7 +51,6 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public void FixedUpdate() {
-		Debug.Log(rigidbody.velocity);
 		transform.position = new Vector3(transform.position.x, originalYPosition, transform.position.z);
 	}
 	

@@ -13,6 +13,9 @@ public class PowerCore : MonoBehaviour {
 	public Texture PowerCoreMarker;
 	public ParticleEmitter SuccessVisualIndicator;
 	
+	static Ship ship;
+	const float OFFSCREEN = -100;
+	
 	float startTime;
 	float endTime;
 	float markerStart = 50;
@@ -22,8 +25,6 @@ public class PowerCore : MonoBehaviour {
 	float visualIndicatorEdge = 1.25f;
 	bool specialtyPowerupChosen;
 	
-	const float OFFSCREEN = -100;
-	
 	Rect powerCoreBackgroundRect = new Rect(50, 425, 500, 20);
 	Rect thrusterIconRect = new Rect(OFFSCREEN, 427, 16, 16);
 	Rect weaponIconRect = new Rect(OFFSCREEN, 427, 16, 16);
@@ -32,12 +33,13 @@ public class PowerCore : MonoBehaviour {
 	Rect powerCoreMarkerRect = new Rect(OFFSCREEN, 425, 7, 20);
 	Rect powerCoreCollisionRect = new Rect(OFFSCREEN, 425, 11, 20);
 	float COLLISION_RECT_X_OFFSET = 5;
-	Ship ShipBehaviour;
 	
 	public void Start() {
+		if(null == ship) {
+			ship = GameObject.Find("Ship").GetComponent<Ship>();
+		}
 		leftMarkerEdge = markerStart;
 		backgroundWidth = markerEnd - markerStart;
-		ShipBehaviour = GetComponent<Ship>();
 		ResetTrack();
 	}
 	
@@ -51,22 +53,22 @@ public class PowerCore : MonoBehaviour {
 			var hitSomething = false;
 
 			if(Overlapping(powerCoreCollisionRect, thrusterIconRect)) {
-				ShipBehaviour.PowerupThruster(ThrusterEnergyRecharge);
+				ship.PowerupThruster(ThrusterEnergyRecharge);
 				VoidTrack();
 				hitSomething = true;
 			}
 			else if(Overlapping(powerCoreCollisionRect, weaponIconRect)) {
-				ShipBehaviour.PowerupWeapon(WeaponEnergyRecharge);
+				ship.PowerupWeapon(WeaponEnergyRecharge);
 				VoidTrack();
 				hitSomething = true;
 			}
 			else if(Overlapping(powerCoreCollisionRect, sensorIconRect)) {
-				ShipBehaviour.PowerupSensor(SensorEnergyRecharge);
+				ship.PowerupSensor(SensorEnergyRecharge);
 				VoidTrack();
 				hitSomething = true;
 			}
 			else if(Overlapping(powerCoreCollisionRect, shieldIconRect)) {
-				ShipBehaviour.PowerupShield(ShieldEnergyRecharge);
+				ship.PowerupShield(ShieldEnergyRecharge);
 				VoidTrack();
 				hitSomething = true;
 			}
@@ -86,10 +88,10 @@ public class PowerCore : MonoBehaviour {
 		
 		if(Time.time > endTime) {
 			if(!specialtyPowerupChosen) {
-				ShipBehaviour.PowerupThruster(DefaultEnergyRecharge);
-				ShipBehaviour.PowerupWeapon(DefaultEnergyRecharge);
-				ShipBehaviour.PowerupSensor(DefaultEnergyRecharge);
-				ShipBehaviour.PowerupShield(DefaultEnergyRecharge / 2);
+				ship.PowerupThruster(DefaultEnergyRecharge);
+				ship.PowerupWeapon(DefaultEnergyRecharge);
+				ship.PowerupSensor(DefaultEnergyRecharge);
+				ship.PowerupShield(DefaultEnergyRecharge / 2);
 			}
 			ResetTrack();
 			var temp = markerEnd;
@@ -101,10 +103,10 @@ public class PowerCore : MonoBehaviour {
 	public void OnGUI() {
 		GUI.backgroundColor = Color.white;
 		GUI.DrawTexture(powerCoreBackgroundRect, PowerCoreBackground);
-		GUI.DrawTexture(thrusterIconRect, ShipBehaviour.ThrusterIcon);
-		GUI.DrawTexture(weaponIconRect, ShipBehaviour.WeaponIcon);
-		GUI.DrawTexture(sensorIconRect, ShipBehaviour.SensorIcon);
-		GUI.DrawTexture(shieldIconRect, ShipBehaviour.ShieldIcon);
+		GUI.DrawTexture(thrusterIconRect, ship.ThrusterIcon);
+		GUI.DrawTexture(weaponIconRect, ship.WeaponIcon);
+		GUI.DrawTexture(sensorIconRect, ship.SensorIcon);
+		GUI.DrawTexture(shieldIconRect, ship.ShieldIcon);
 		GUI.DrawTexture(powerCoreMarkerRect, PowerCoreMarker);
 	}
 	
