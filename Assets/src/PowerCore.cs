@@ -15,29 +15,48 @@ public class PowerCore : MonoBehaviour {
 	
 	static Ship ship;
 	const float OFFSCREEN = -100;
+	const float COLLISION_RECT_X_OFFSET = 5;
 	
+	float powerCoreBackgroundHeight = 20;
+	float powerCoreIconHeight = 16;
+	float powerCoreIconWidth = 16;
+	float powerCoreIconYPosition;
+	float bottomOfMainCamera;
+	
+	// old vars
 	float startTime;
 	float endTime;
-	float markerStart = 50;
-	float markerEnd = 543;
+	float markerStart = 0;
+	float markerEnd;
 	float leftMarkerEdge;
 	float backgroundWidth;
-	float visualIndicatorEdge = 1.25f;
+	float visualIndicatorEdge = 1.5f;
 	bool specialtyPowerupChosen;
 	
-	Rect powerCoreBackgroundRect = new Rect(50, 425, 500, 20);
-	Rect thrusterIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	Rect weaponIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	Rect sensorIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	Rect shieldIconRect = new Rect(OFFSCREEN, 427, 16, 16);
-	Rect powerCoreMarkerRect = new Rect(OFFSCREEN, 425, 7, 20);
-	Rect powerCoreCollisionRect = new Rect(OFFSCREEN, 425, 11, 20);
-	float COLLISION_RECT_X_OFFSET = 5;
+	Rect powerCoreBackgroundRect;
+	Rect thrusterIconRect;
+	Rect weaponIconRect;
+	Rect sensorIconRect;
+	Rect shieldIconRect;
+	Rect powerCoreMarkerRect;
+	Rect powerCoreCollisionRect;
 	
 	public void Start() {
 		if(null == ship) {
 			ship = GameObject.Find("Ship").GetComponent<Ship>();
 		}
+		
+		markerEnd = Screen.width;
+		bottomOfMainCamera = Screen.height - GameObject.Find("Map Camera").GetComponent<Camera>().pixelHeight;
+		powerCoreIconYPosition = bottomOfMainCamera - ((powerCoreBackgroundHeight - powerCoreIconHeight) / 2) - powerCoreIconHeight;
+		powerCoreBackgroundRect = new Rect(0, bottomOfMainCamera - powerCoreBackgroundHeight, (float)Screen.width, powerCoreBackgroundHeight);
+		thrusterIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
+		weaponIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
+		sensorIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
+		shieldIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
+		powerCoreMarkerRect = new Rect(OFFSCREEN, bottomOfMainCamera - powerCoreBackgroundHeight, 7, powerCoreBackgroundHeight);
+		powerCoreCollisionRect = new Rect(powerCoreMarkerRect.x, powerCoreMarkerRect.y, powerCoreMarkerRect.width + (2 * COLLISION_RECT_X_OFFSET), powerCoreBackgroundHeight);	
+		
 		leftMarkerEdge = markerStart;
 		backgroundWidth = markerEnd - markerStart;
 		ResetTrack();
@@ -79,8 +98,9 @@ public class PowerCore : MonoBehaviour {
 			
 			if(hitSomething) {
 				float locationPercentage = ((powerCoreMarkerRect.x - leftMarkerEdge) / backgroundWidth * 2) - 1;
-				Debug.Log(locationPercentage);
-				Vector3 pos = new Vector3(locationPercentage * visualIndicatorEdge, -1, 2);
+				Vector3 pos = new Vector3(locationPercentage * visualIndicatorEdge, 
+				                          SuccessVisualIndicator.transform.localPosition.y,
+				                          SuccessVisualIndicator.transform.localPosition.z);
 				SuccessVisualIndicator.gameObject.transform.localPosition = pos;
 				SuccessVisualIndicator.Emit(5);
 			}
@@ -139,9 +159,9 @@ public class PowerCore : MonoBehaviour {
 	}
 	
 	void RandomizeIconLocations() {
-		thrusterIconRect.x = Random.Range(50, 530);
-		weaponIconRect.x = Random.Range(50, 530);
-		sensorIconRect.x = Random.Range(50, 530);
-		shieldIconRect.x = Random.Range(50, 530);
+		thrusterIconRect.x = Random.Range(0, Screen.width - powerCoreIconWidth);
+		weaponIconRect.x = Random.Range(0, Screen.width - powerCoreIconWidth);
+		sensorIconRect.x = Random.Range(0, Screen.width - powerCoreIconWidth);
+		shieldIconRect.x = Random.Range(0, Screen.width - powerCoreIconWidth);
 	}
 }
