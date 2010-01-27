@@ -23,6 +23,8 @@ public class Missile : MonoBehaviour {
 	}
 	
 	public void OnCollisionEnter(Collision other) {
+//		Debug.Log("colliding with: " + other.gameObject.name + ", with tag: " + other.gameObject.tag + ", collider: " + (null != other.collider));
+		
 		if("Ship" == other.gameObject.tag) {
 			ship.Damage(Damage);
 		}

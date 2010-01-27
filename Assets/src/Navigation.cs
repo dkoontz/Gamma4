@@ -38,8 +38,4 @@ public class Navigation : MonoBehaviour {
 		transform.position = new Vector3(transform.position.x, transform.position.y, zPosition);
 		//		renderer.material.SetTextureOffset("_MainTex", new Vector2(0, offset));
 	}
-	
-	public void OnGUI() {
-		GUI.Label(new Rect(10, 450, 100, 50), "Test Label");
-	}
 }

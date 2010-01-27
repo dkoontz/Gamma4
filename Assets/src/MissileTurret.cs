@@ -6,23 +6,26 @@ public class MissileTurret : MonoBehaviour {
 	public GameObject Missile;
 	public float MissileRechargeTimeInSeconds = 5;
 		
-	int TURRETS_LAYER = 1 << LayerMask.NameToLayer("Turrets");
-	bool readyToFire = true;
-	float timeUntilNextMissile = 0;
+	public int IGNORE_LAYERS;
+	public bool readyToFire = true;
+	public float timeUntilNextMissile = 0;
 	Transform centerTube;
 	Transform leftTube;
 	Transform rightTube;
+	BoxCollider turretCollider;
 	
 	public void Start() {
-		centerTube = transform.Find("Center Tube");
-		leftTube = transform.Find("Left Tube");
-		rightTube = transform.Find("Right Tube");
+		IGNORE_LAYERS = 1 << LayerMask.NameToLayer("Turrets");
+		centerTube = transform.Find("Turret/Center Tube");
+		leftTube = transform.Find("Turret/Left Tube");
+		rightTube = transform.Find("Turret/Right Tube");
+		turretCollider = transform.Find("Ball").GetComponent<BoxCollider>();
 	}
 	
 	public void OnTriggerStay(Collider other) {
-		if("Ship" == other.gameObject.tag) {
-			transform.LookAt(other.gameObject.transform.position);
-			Debug.DrawLine(transform.position, other.gameObject.transform.position);
+		if("Ship" == other.tag) {
+			transform.LookAt(other.transform.position);
+			Debug.DrawLine(transform.position, other.transform.position);
 			if(readyToFire) {
 				FireMissileAt(other.gameObject);
 			}
@@ -47,24 +50,21 @@ public class MissileTurret : MonoBehaviour {
 		var hitInfo = new RaycastHit();
 		
 		// only fire if we have clear line of sight to the target
-		if(Physics.Raycast(ray, out hitInfo, 100, ~TURRETS_LAYER)) {
-			if("Ship" == hitInfo.transform.gameObject.tag) {
-				var missile = (GameObject)Instantiate(Missile);
-				missile.transform.position = centerTube.position;
-				missile.transform.rotation = centerTube.rotation;
+		if(Physics.Raycast(ray, out hitInfo, 100, ~IGNORE_LAYERS)) {
+			if("Ship" == hitInfo.collider.tag) {
+				var missile = (GameObject)Instantiate(Missile, centerTube.position, centerTube.rotation);
 				missile.transform.Rotate(-90, 0, 0);
+				Physics.IgnoreCollision(turretCollider, missile.collider);
 				missile.GetComponent<Missile>().Launch();
 				
-				missile = (GameObject)Instantiate(Missile);
-				missile.transform.position = leftTube.position;
-				missile.transform.rotation = leftTube.rotation;
+				missile = (GameObject)Instantiate(Missile, leftTube.position, leftTube.rotation);
 				missile.transform.Rotate(-90, 0, 0);
+				Physics.IgnoreCollision(turretCollider, missile.collider);
 				missile.GetComponent<Missile>().Launch();
 				
-				missile = (GameObject)Instantiate(Missile);
-				missile.transform.position = rightTube.position;
-				missile.transform.rotation = rightTube.rotation;
+				missile = (GameObject)Instantiate(Missile, rightTube.position, rightTube.rotation);
 				missile.transform.Rotate(-90, 0, 0);
+				Physics.IgnoreCollision(turretCollider, missile.collider);
 				missile.GetComponent<Missile>().Launch();
 				
 				timeUntilNextMissile = MissileRechargeTimeInSeconds;

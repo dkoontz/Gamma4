@@ -28,7 +28,6 @@ public class Weapon : MonoBehaviour {
 	}
 	
 	public void Update() {
-		
 		if(Input.GetButton("Weapon") && ship.ActivateWeapon(Time.deltaTime)) {
 			beam.GetComponent<MeshRenderer>().enabled = true;
 			ship.Firing = true;
