@@ -29,9 +29,9 @@ public class Missile : MonoBehaviour {
 		Destroy(gameObject);
 	}
 	
-	public void Update() {
-		Debug.DrawRay(transform.position, transform.forward);
-	}
+//	public void Update() {
+//		Debug.DrawRay(transform.position, transform.up);
+//	}
 	
 	public void Launch() {
 		rigidbody.AddForce(transform.forward * ThrustForce);

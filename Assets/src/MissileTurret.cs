@@ -5,16 +5,27 @@ public class MissileTurret : MonoBehaviour {
 
 	public GameObject Missile;
 	public float MissileRechargeTimeInSeconds = 5;
-	
+		
 	int TURRETS_LAYER = 1 << LayerMask.NameToLayer("Turrets");
-	public bool readyToFire = true;
-	public float timeUntilNextMissile = 0;
+	bool readyToFire = true;
+	float timeUntilNextMissile = 0;
+	Transform centerTube;
+	Transform leftTube;
+	Transform rightTube;
 	
+	public void Start() {
+		centerTube = transform.Find("Center Tube");
+		leftTube = transform.Find("Left Tube");
+		rightTube = transform.Find("Right Tube");
+	}
 	
 	public void OnTriggerStay(Collider other) {
-		if("Ship" == other.gameObject.tag && readyToFire) {
-//			Debug.DrawLine(transform.position, other.gameObject.transform.position);
-			FireMissileAt(other.gameObject);
+		if("Ship" == other.gameObject.tag) {
+			transform.LookAt(other.gameObject.transform.position);
+			Debug.DrawLine(transform.position, other.gameObject.transform.position);
+			if(readyToFire) {
+				FireMissileAt(other.gameObject);
+			}
 		}
 	}
 	
@@ -39,23 +50,21 @@ public class MissileTurret : MonoBehaviour {
 		if(Physics.Raycast(ray, out hitInfo, 100, ~TURRETS_LAYER)) {
 			if("Ship" == hitInfo.transform.gameObject.tag) {
 				var missile = (GameObject)Instantiate(Missile);
-				missile.transform.position = transform.position;
-				missile.transform.LookAt(target.transform.position);
-				missile.transform.Translate(missile.transform.forward * -5f);
+				missile.transform.position = centerTube.position;
+				missile.transform.rotation = centerTube.rotation;
+				missile.transform.Rotate(-90, 0, 0);
 				missile.GetComponent<Missile>().Launch();
 				
 				missile = (GameObject)Instantiate(Missile);
-				missile.transform.position = transform.position;
-				missile.transform.LookAt(target.transform.position);
-				missile.transform.Rotate(0, -15, 0);
-				missile.transform.Translate(missile.transform.forward * -5f);
+				missile.transform.position = leftTube.position;
+				missile.transform.rotation = leftTube.rotation;
+				missile.transform.Rotate(-90, 0, 0);
 				missile.GetComponent<Missile>().Launch();
 				
 				missile = (GameObject)Instantiate(Missile);
-				missile.transform.position = transform.position;
-				missile.transform.LookAt(target.transform.position);
-				missile.transform.Rotate(0, 15, 0);
-				missile.transform.Translate(missile.transform.forward * -5f);
+				missile.transform.position = rightTube.position;
+				missile.transform.rotation = rightTube.rotation;
+				missile.transform.Rotate(-90, 0, 0);
 				missile.GetComponent<Missile>().Launch();
 				
 				timeUntilNextMissile = MissileRechargeTimeInSeconds;

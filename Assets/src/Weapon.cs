@@ -48,6 +48,8 @@ public class Weapon : MonoBehaviour {
 				LaserBurnEffect.emit = true;
 			}
 			else {
+				var scale = beam.transform.parent.localScale;
+				beam.transform.parent.localScale = new Vector3(scale.x, mining_laser_scale, scale.z);
 				LaserBurnEffect.emit = false;
 			}
 		}
