@@ -13,6 +13,10 @@ public class Ship : MonoBehaviour {
 	public Texture WeaponIcon;
 	public Texture SensorIcon;
 	public Texture ShieldIcon;
+	public Texture ThrusterIconSmall;
+	public Texture WeaponIconSmall;
+	public Texture SensorIconSmall;
+	public Texture ShieldIconSmall;
 	
 	public bool Firing {get; set;}
 		

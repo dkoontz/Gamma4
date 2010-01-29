@@ -17,13 +17,13 @@ public class PowerCore : MonoBehaviour {
 	const float OFFSCREEN = -100;
 	const float COLLISION_RECT_X_OFFSET = 5;
 	
+	float powerCoreiconScreenWidthPercentage = 0.025f;
 	float powerCoreBackgroundHeight = 20;
 	float powerCoreIconHeight = 16;
-	float powerCoreIconWidth = 16;
+	float powerCoreIconWidth;
 	float powerCoreIconYPosition;
 	float bottomOfMainCamera;
 	
-	// old vars
 	float startTime;
 	float endTime;
 	float markerStart = 0;
@@ -50,10 +50,12 @@ public class PowerCore : MonoBehaviour {
 		bottomOfMainCamera = Screen.height - GameObject.Find("Map Camera").GetComponent<Camera>().pixelHeight;
 		powerCoreIconYPosition = bottomOfMainCamera - ((powerCoreBackgroundHeight - powerCoreIconHeight) / 2) - powerCoreIconHeight;
 		powerCoreBackgroundRect = new Rect(0, bottomOfMainCamera - powerCoreBackgroundHeight, (float)Screen.width, powerCoreBackgroundHeight);
-		thrusterIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
-		weaponIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
-		sensorIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
-		shieldIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, 16, 16);
+		
+		powerCoreIconWidth = Screen.width * powerCoreiconScreenWidthPercentage;
+		thrusterIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, powerCoreIconWidth, powerCoreIconHeight);
+		weaponIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, powerCoreIconWidth, powerCoreIconHeight);
+		sensorIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, powerCoreIconWidth, powerCoreIconHeight);
+		shieldIconRect = new Rect(OFFSCREEN, powerCoreIconYPosition, powerCoreIconWidth, powerCoreIconHeight);
 		powerCoreMarkerRect = new Rect(OFFSCREEN, bottomOfMainCamera - powerCoreBackgroundHeight, 7, powerCoreBackgroundHeight);
 		powerCoreCollisionRect = new Rect(powerCoreMarkerRect.x, powerCoreMarkerRect.y, powerCoreMarkerRect.width + (2 * COLLISION_RECT_X_OFFSET), powerCoreBackgroundHeight);	
 		
@@ -123,10 +125,10 @@ public class PowerCore : MonoBehaviour {
 	public void OnGUI() {
 		GUI.backgroundColor = Color.white;
 		GUI.DrawTexture(powerCoreBackgroundRect, PowerCoreBackground);
-		GUI.DrawTexture(thrusterIconRect, ship.ThrusterIcon);
-		GUI.DrawTexture(weaponIconRect, ship.WeaponIcon);
-		GUI.DrawTexture(sensorIconRect, ship.SensorIcon);
-		GUI.DrawTexture(shieldIconRect, ship.ShieldIcon);
+		GUI.DrawTexture(thrusterIconRect, ship.ThrusterIconSmall);
+		GUI.DrawTexture(weaponIconRect, ship.WeaponIconSmall);
+		GUI.DrawTexture(sensorIconRect, ship.SensorIconSmall);
+		GUI.DrawTexture(shieldIconRect, ship.ShieldIconSmall);
 		GUI.DrawTexture(powerCoreMarkerRect, PowerCoreMarker);
 	}
 	
