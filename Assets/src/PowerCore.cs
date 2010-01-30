@@ -69,7 +69,7 @@ public class PowerCore : MonoBehaviour {
 		powerCoreCollisionRect = powerCoreMarkerRect;
 		powerCoreCollisionRect.x -= COLLISION_RECT_X_OFFSET;
 
-		if(Input.GetButtonDown("PowerCore")) {
+		if(Input.GetButtonDown("Player3")) {
 			specialtyPowerupChosen = true;
 			var hitSomething = false;
 

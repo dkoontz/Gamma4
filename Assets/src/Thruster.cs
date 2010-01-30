@@ -16,7 +16,7 @@ public class Thruster : MonoBehaviour {
 	}
 	
 	public void Update() {
-		if(Input.GetButton("Thruster") && ship.ActivateThruster(Time.deltaTime)) {
+		if(Input.GetButton("Player1") && ship.ActivateThruster(Time.deltaTime)) {
 			thrust = true;
 			ExhaustTrail.GetComponent<ParticleEmitter>().emit = true;
 		}

@@ -26,7 +26,7 @@ public class Navigation : MonoBehaviour {
 //		shipOffset = ((ship.transform.position.z - MapBottomPositionInWorldspace) / mapHeight) * 0.70f;
 		
 		
-		if(Input.GetButton("Sensor") && ship.ActivateSensor(Time.deltaTime)) {
+		if(Input.GetButton("Player4") && ship.ActivateSensor(Time.deltaTime)) {
 			zPosition += ScrollSpeedPerSecond * Time.deltaTime;
 		}
 		else {
