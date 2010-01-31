@@ -27,10 +27,8 @@ public class MissileTurret : MonoBehaviour {
 	}
 	
 	public void OnTriggerStay(Collider other) {
-		Debug.Log("triggered by: " + other.name);
 		if("Ship" == other.tag) {
 			transform.LookAt(other.transform.position);
-			Debug.DrawLine(transform.position, other.transform.position);
 			if(readyToFire) {
 				FireMissileAt(other.gameObject);
 			}
@@ -48,7 +46,6 @@ public class MissileTurret : MonoBehaviour {
 	}
 	
 	void FireMissileAt(GameObject target) {
-		Debug.Log("Firing missile at: " + target.name);
 		var vectorToTarget = target.transform.position - transform.position;
       	vectorToTarget.Normalize();
 		
@@ -57,7 +54,6 @@ public class MissileTurret : MonoBehaviour {
 		
 		// only fire if we have clear line of sight to the target
 		if(Physics.Raycast(ray, out hitInfo, 100, ~IGNORE_LAYERS)) {
-			Debug.Log("Ray hit: " + hitInfo.collider.name);
 			if("Ship" == hitInfo.collider.tag) {
 				var missile = (GameObject)Instantiate(Missile, centerTube.position, centerTube.rotation);
 				missile.transform.Rotate(-90, 0, 0);
@@ -85,5 +81,4 @@ public class MissileTurret : MonoBehaviour {
 			}
 		}
 	}
-		
 }

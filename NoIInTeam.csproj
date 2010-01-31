@@ -59,6 +59,7 @@
      <Compile Include="Assets\src\Navigation.cs" />
      <Compile Include="Assets\src\ObjectSpawner.cs" />
      <Compile Include="Assets\src\PowerCore.cs" />
+     <Compile Include="Assets\src\QuitHandler.cs" />
      <Compile Include="Assets\src\Respawn.cs" />
      <Compile Include="Assets\src\Ship.cs" />
      <Compile Include="Assets\src\StationRotation.cs" />

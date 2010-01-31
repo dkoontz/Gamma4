@@ -5,6 +5,7 @@ public class Missile : MonoBehaviour {
 	public float LifespanInSeconds = 5;
 	public float ThrustForce = 1000;
 	public float Damage = 20;
+	public GameObject MissileImpact;
 	
 	static Ship ship;
 	
@@ -23,11 +24,13 @@ public class Missile : MonoBehaviour {
 	}
 	
 	public void OnCollisionEnter(Collision other) {
-		Debug.Log("colliding with: " + other.gameObject.name + ", with tag: " + other.gameObject.tag + ", collider: " + (null != other.collider));
+//		Debug.Log("colliding with: " + other.gameObject.name + ", with tag: " + other.gameObject.tag + ", collider: " + (null != other.collider));
 		
 		if("Ship" == other.gameObject.tag) {
 			ship.Damage(Damage);
 		}
+		var contact = other.contacts[0];
+		Instantiate(MissileImpact, contact.point, Quaternion.Euler(contact.normal));
 		Destroy(gameObject);
 	}
 	
