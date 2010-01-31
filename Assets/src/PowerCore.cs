@@ -105,6 +105,7 @@ public class PowerCore : MonoBehaviour {
 				                          SuccessVisualIndicator.transform.localPosition.z);
 				SuccessVisualIndicator.gameObject.transform.localPosition = pos;
 				SuccessVisualIndicator.Emit(5);
+				SuccessVisualIndicator.GetComponent<AudioSource>().Play();
 			}
 		}
 		

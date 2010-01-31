@@ -19,10 +19,15 @@ public class Thruster : MonoBehaviour {
 		if(Input.GetButton("Player1") && ship.ActivateThruster(Time.deltaTime)) {
 			thrust = true;
 			ExhaustTrail.GetComponent<ParticleEmitter>().emit = true;
+			if(!ExhaustTrail.GetComponent<AudioSource>().isPlaying) {
+				Debug.Log("playing sound");
+				ExhaustTrail.GetComponent<AudioSource>().Play();
+			}
 		}
 		else {
 			thrust = false;
 			ExhaustTrail.GetComponent<ParticleEmitter>().emit = false;
+			ExhaustTrail.GetComponent<AudioSource>().Pause();
 		}
 	}
 	

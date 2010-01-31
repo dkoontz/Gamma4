@@ -5,6 +5,7 @@ public class Asteroid : MonoBehaviour {
 	public bool FixedLifespan = true;
 	public float LifespanInSeconds = 45;
 	public float Damage = 40;
+	public GameObject AsteroidPieces;
 	
 	static Ship ship;
 	
@@ -24,7 +25,12 @@ public class Asteroid : MonoBehaviour {
 	
 	public void OnTriggerEnter(Collider other) {
 //		Debug.Log("Triggered by: " + other.gameObject.name);
-		if(("Weapon" == other.tag && ship.Firing) || "Respawn Point 1" == other.tag) {
+		if(("Weapon" == other.tag) && ship.Firing) {
+			BreakApart();
+			Destroy(gameObject);
+		}
+		
+		if("Respawn Point 1" == other.tag) {
 			Destroy(gameObject);
 		}
 	}
@@ -34,11 +40,16 @@ public class Asteroid : MonoBehaviour {
 		if("Ship" == other.gameObject.tag) {
 			ship.Damage(Damage);
 		}
+		BreakApart();
 		Destroy(gameObject);
 	}
 	
 	IEnumerator Cleanup(float timeToLive) {
 		yield return new WaitForSeconds(timeToLive);
 		Destroy(gameObject);
+	}
+	
+	void BreakApart() {
+		Instantiate(AsteroidPieces, transform.position, transform.rotation);
 	}
 }

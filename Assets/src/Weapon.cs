@@ -31,6 +31,9 @@ public class Weapon : MonoBehaviour {
 		if(Input.GetButton("Player2") && ship.ActivateWeapon(Time.deltaTime)) {
 			beam.GetComponent<MeshRenderer>().enabled = true;
 			ship.Firing = true;
+			if(!Laser.GetComponent<AudioSource>().isPlaying) {
+				Laser.GetComponent<AudioSource>().Play();
+			}
 			
 			Debug.DrawRay(beam.transform.position, beam.transform.up * BEAM_LENGTH);
 			Debug.DrawRay(beam.transform.position + new Vector3(0, 0.5f, 0), beam.transform.up * BEAM_LENGTH);
@@ -56,6 +59,7 @@ public class Weapon : MonoBehaviour {
 			beam.GetComponent<MeshRenderer>().enabled = false;
 			ship.Firing = false;
 			LaserBurnEffect.emit = false;
+			Laser.GetComponent<AudioSource>().Pause();
 		}
 	}
 }

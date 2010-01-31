@@ -120,6 +120,7 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public void Damage(float damageAmount) {
+		GetComponent<AudioSource>().Play();
 		if(!respawning) {
 			shieldEnergy -= damageAmount;
 			if(shieldEnergy <= 0) {

@@ -75,6 +75,7 @@ public class MissileTurret : MonoBehaviour {
 					Physics.IgnoreCollision(collider, missile.collider);				
 				}
 				missile.GetComponent<Missile>().Launch();
+				GetComponent<AudioSource>().Play();
 				
 				timeUntilNextMissile = MissileRechargeTimeInSeconds;
 				readyToFire = false;
