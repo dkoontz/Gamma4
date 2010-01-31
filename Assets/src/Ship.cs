@@ -17,9 +17,14 @@ public class Ship : MonoBehaviour {
 	public Texture WeaponIconSmall;
 	public Texture SensorIconSmall;
 	public Texture ShieldIconSmall;
+	public GUIText ThrusterPowerText;
+	public GUIText WeaponPowerText;
+	public GUIText SensorPowerText;
+	public GUIText ShieldPowerText;
 	
 	public bool Firing {get; set;}
-		
+	
+	float iconScreenPercentage = 0.05333f;
 	float thrusterEnergy;
 	float weaponEnergy;
 	float sensorEnergy;
@@ -28,30 +33,32 @@ public class Ship : MonoBehaviour {
 	float originalYPosition;
 	GameObject respawn;
 	
-	Rect thrusterIconRect = new Rect(5, 5, 32, 32);
-	Rect thrusterTextRect = new Rect(40, 12, 100, 25);
-	Rect weaponIconRect = new Rect(5, 40, 32, 32);
-	Rect weaponTextRect = new Rect(40, 47, 100, 25);
-	Rect sensorIconRect = new Rect(5, 75, 32, 32);
-	Rect sensorTextRect = new Rect(40, 82, 100, 25);
-	Rect shieldIconRect = new Rect(5, 110, 32, 32);
-	Rect shieldTextRect = new Rect(40, 117, 100, 25);
+	Rect thrusterIconRect;
+	Rect weaponIconRect;
+	Rect sensorIconRect;
+	Rect shieldIconRect;
 	
 	public void Start() {
 		originalYPosition = transform.position.y;
 		Firing = false;
 		ResetPower();
+		var iconSize = iconScreenPercentage * Screen.width;
+		var iconSpacing = iconSize + (Screen.height / 100);
+		thrusterIconRect = new Rect(5, 5, iconSize, iconSize);
+		weaponIconRect = new Rect(5, thrusterIconRect.y + iconSpacing, iconSize, iconSize);
+		sensorIconRect = new Rect(5, weaponIconRect.y + iconSpacing, iconSize, iconSize);
+		shieldIconRect = new Rect(5, sensorIconRect.y + iconSpacing, iconSize, iconSize);
 	}
 	
 	public void OnGUI() {
 		GUI.DrawTexture(thrusterIconRect, ThrusterIcon);
-		GUI.Label(thrusterTextRect, string.Format("{0:f}", thrusterEnergy));
+		ThrusterPowerText.text = string.Format("{0:0.0}", thrusterEnergy);
 		GUI.DrawTexture(weaponIconRect, WeaponIcon);
-		GUI.Label(weaponTextRect, string.Format("{0:f}", weaponEnergy));
+		WeaponPowerText.text = string.Format("{0:0.0}", weaponEnergy);
 		GUI.DrawTexture(sensorIconRect, SensorIcon);
-		GUI.Label(sensorTextRect, string.Format("{0:f}", sensorEnergy));
+		SensorPowerText.text = string.Format("{0:0.0}", sensorEnergy);
 		GUI.DrawTexture(shieldIconRect, ShieldIcon);
-		GUI.Label(shieldTextRect, string.Format("{0:f}", shieldEnergy));
+		ShieldPowerText.text = string.Format("{0:0.0}", shieldEnergy);
 	}
 	
 	public void FixedUpdate() {

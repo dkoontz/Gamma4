@@ -63,6 +63,7 @@
      <Compile Include="Assets\src\Ship.cs" />
      <Compile Include="Assets\src\StationRotation.cs" />
      <Compile Include="Assets\src\Thruster.cs" />
+     <Compile Include="Assets\src\WarpGate.cs" />
      <Compile Include="Assets\src\Weapon.cs" />
      <None Include="Assets\Standard Assets\Blob-Shadow\ShadowProjection.shader" />
      <None Include="Assets\Standard Assets\Water\Sources\FX-Water Simple.shader" />
