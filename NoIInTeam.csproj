@@ -48,6 +48,7 @@
      <Compile Include="Assets\Standard Assets\Scripts\MeshCombineUtility.cs" />
      <Compile Include="Assets\Standard Assets\Water\Sources\WaterSimple.cs" />
      <Compile Include="Assets\src\Asteroid.cs" />
+     <Compile Include="Assets\src\BriefingSlideshow.cs" />
      <Compile Include="Assets\src\FaceHeadingOfParent.cs" />
      <Compile Include="Assets\src\Game.cs" />
      <Compile Include="Assets\src\Gate.cs" />

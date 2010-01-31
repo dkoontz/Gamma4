@@ -7,7 +7,7 @@ public class Game : MonoBehaviour {
 	public float gameMinutes = 4;
 	public GameObject gameOverImage;
 	
-	public float timeRemaining;
+	float timeRemaining;
 	bool gameOver = false;
 	
 	public void Start() {	

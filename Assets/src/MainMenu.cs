@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour {
 		SetGUITextureAlphaTo(player2Text, 0);
 		SetGUITextureAlphaTo(player3Text, 0);
 		SetGUITextureAlphaTo(player4Text, 0);
+		
+//		Application.LoadLevel("briefing");
 	}
 	
 	public void Update () {
@@ -46,7 +48,7 @@ public class MainMenu : MonoBehaviour {
 		}
 		
 		if(player1Ready && player2Ready && player3Ready && player4Ready) {
-			Application.LoadLevel("main_game");
+			Application.LoadLevel("briefing");
 		}
 	}
 	
