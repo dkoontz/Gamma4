@@ -8,6 +8,8 @@ public class Game : MonoBehaviour {
 	public GameObject gameLostImage;
 	public GameObject gameWonImage;
 	public float animationDuration = 5;
+	public AudioClip gameWonClip;
+	public AudioClip gameLostClip;
 	
 	float gameOverScreenPercentage = 1.678329f;
 	float timeRemaining;
@@ -41,6 +43,9 @@ public class Game : MonoBehaviour {
 		if(timeRemaining <= 0 && !gameLost && !gameWon) {
 			gameLost = true;
 			timeRemaining = 0;
+			var audio = GetComponent<AudioSource>();
+			audio.clip = gameLostClip;
+			audio.Play();
 			var imageScale = GameOverImageScale(gameLostImage);
 			gameLostImage.transform.localScale = new Vector3(imageScale, imageScale, imageScale);
 			Animate(gameLostImage);
@@ -56,6 +61,10 @@ public class Game : MonoBehaviour {
 	public void Win() {
 		if(!gameWon && !gameLost) {
 			gameWon = true;
+			var audio = GetComponent<AudioSource>();
+			audio.clip = gameWonClip;
+			audio.Play();
+			
 			var imageScale = GameOverImageScale(gameWonImage);
 			gameWonImage.transform.localScale = new Vector3(imageScale, imageScale, imageScale);
 			Animate(gameWonImage);

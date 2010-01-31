@@ -14,8 +14,4 @@ public class WarpGate : MonoBehaviour {
 			ship.rigidbody.AddForce(transform.forward * 50000);
 		}
 	}
-	
-	public void Update() {
-		
-	}
 }

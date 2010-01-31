@@ -31,6 +31,7 @@ public class GatePowerCell : MonoBehaviour {
 				activeIndicator.emit = true;
 				activated = true;
 				LinkedGate.PowerCellActivated(this);
+				GetComponent<AudioSource>().Play();
 			}
 	
 			SetTransparency(((powerLevel / 100) * 0.8f) + 0.2f);

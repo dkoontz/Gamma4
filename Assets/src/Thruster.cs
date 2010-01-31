@@ -20,7 +20,6 @@ public class Thruster : MonoBehaviour {
 			thrust = true;
 			ExhaustTrail.GetComponent<ParticleEmitter>().emit = true;
 			if(!ExhaustTrail.GetComponent<AudioSource>().isPlaying) {
-				Debug.Log("playing sound");
 				ExhaustTrail.GetComponent<AudioSource>().Play();
 			}
 		}
