@@ -29,6 +29,7 @@ public class Game : MonoBehaviour {
 			                             guiTexture.color.g, 
 										guiTexture.color.b, 
                                        	0);
+		GameObject.Find("Space").GetComponent<MeshRenderer>().enabled = true;
 	}
 	
 	public void Update() {

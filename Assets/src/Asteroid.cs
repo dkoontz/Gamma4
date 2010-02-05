@@ -26,7 +26,7 @@ public class Asteroid : MonoBehaviour {
 	public void OnTriggerEnter(Collider other) {
 //		Debug.Log("Triggered by: " + other.gameObject.name);
 		if(("Weapon" == other.tag) && ship.Firing) {
-			BreakApart();
+			BreakApart(new Vector3(Random.Range(0, 1), 0, Random.Range(0, 1)));
 			Destroy(gameObject);
 		}
 		
@@ -40,7 +40,7 @@ public class Asteroid : MonoBehaviour {
 		if("Ship" == other.gameObject.tag) {
 			ship.Damage(Damage);
 		}
-		BreakApart();
+		BreakApart(other.contacts[0].normal);
 		Destroy(gameObject);
 	}
 	
@@ -49,7 +49,8 @@ public class Asteroid : MonoBehaviour {
 		Destroy(gameObject);
 	}
 	
-	void BreakApart() {
-		Instantiate(AsteroidPieces, transform.position, transform.rotation);
+	void BreakApart(Vector3 direction) {
+		var emitter = (GameObject)Instantiate(AsteroidPieces, transform.position, transform.rotation);
+		emitter.GetComponent<ParticleEmitter>().worldVelocity = direction * 2;
 	}
 }

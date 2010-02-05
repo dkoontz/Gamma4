@@ -8,6 +8,9 @@ public class MainMenu : MonoBehaviour {
 	public GameObject player3Text;
 	public GameObject player4Text;
 	
+	public AudioClip crossoutClip;
+	public AudioClip confirmClip;
+	
 	bool player1Ready = false;
 	bool player2Ready = false;
 	bool player3Ready = false;
@@ -18,33 +21,43 @@ public class MainMenu : MonoBehaviour {
 		SetGUITextureAlphaTo(player2Text, 0);
 		SetGUITextureAlphaTo(player3Text, 0);
 		SetGUITextureAlphaTo(player4Text, 0);
-		
-//		Application.LoadLevel("briefing");
 	}
 	
 	public void Update () {
 		if(Input.GetButton("Player1")) {
-			player1Text.GetComponent<Animation>().Stop();
-			SetGUITextureAlphaTo(player1Text, 0.5f);
-			player1Ready = true;
+			if(!player1Ready) {
+				player1Text.GetComponent<Animation>().Stop();
+				SetGUITextureAlphaTo(player1Text, 1);
+				player1Ready = true;
+				PlayConfirmationSound();
+			}
 		}
 
 		if(Input.GetButton("Player2")) {
-			player2Text.GetComponent<Animation>().Stop();
-			SetGUITextureAlphaTo(player2Text, 0.5f);
-			player2Ready = true;
+			if(!player2Ready) {
+				player2Text.GetComponent<Animation>().Stop();
+				SetGUITextureAlphaTo(player2Text, 1);
+				player2Ready = true;
+				PlayConfirmationSound();
+			}
 		}
 		
 		if(Input.GetButton("Player3")) {
-			player3Text.GetComponent<Animation>().Stop();
-			SetGUITextureAlphaTo(player3Text, 0.5f);
-			player3Ready = true;
+			if(!player3Ready) {
+				player3Text.GetComponent<Animation>().Stop();
+				SetGUITextureAlphaTo(player3Text, 1);
+				player3Ready = true;
+				PlayConfirmationSound();
+			}
 		}
 		
 		if(Input.GetButton("Player4")) {
-			player4Text.GetComponent<Animation>().Stop();
-			SetGUITextureAlphaTo(player3Text, 0.5f);
-			player4Ready = true;
+			if(!player4Ready) {
+				player4Text.GetComponent<Animation>().Stop();
+				SetGUITextureAlphaTo(player4Text, 1);
+				player4Ready = true;
+				PlayConfirmationSound();
+			}
 		}
 		
 		if(player1Ready && player2Ready && player3Ready && player4Ready) {
@@ -53,10 +66,28 @@ public class MainMenu : MonoBehaviour {
 	}
 	
 	public void EnableMenu() {
-		player1Text.GetComponent<Animation>().Play();
-		player2Text.GetComponent<Animation>().Play();
-		player3Text.GetComponent<Animation>().Play();
-		player4Text.GetComponent<Animation>().Play();
+		if(!player1Ready) { 
+			player1Text.GetComponent<Animation>().Play();
+		}
+		if(!player2Ready) {
+			player2Text.GetComponent<Animation>().Play();
+		}
+		if(!player3Ready) {
+			player3Text.GetComponent<Animation>().Play();
+		}
+		if(!player4Ready) {
+			player4Text.GetComponent<Animation>().Play();
+		}
+	}
+	
+	public void PlayCrossoutSound() {
+		GetComponent<AudioSource>().clip = crossoutClip;
+		GetComponent<AudioSource>().Play();
+	}
+	
+	public void PlayConfirmationSound() {
+		GetComponent<AudioSource>().clip = confirmClip;
+		GetComponent<AudioSource>().Play();
 	}
 	
 	private void SetGUITextureAlphaTo(GameObject target, float alpha) {
