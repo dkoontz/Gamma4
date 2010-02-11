@@ -12,7 +12,6 @@ public class LevelSection : MonoBehaviour {
 	}
 	
 	public void Update () {
-	
 		
 	}
 	

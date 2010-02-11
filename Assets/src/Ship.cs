@@ -9,6 +9,7 @@ public class Ship : MonoBehaviour {
 	public float WeaponEnergyUsePerSecond = 80;
 	public float SensorEnergyUsePerSecond = 20;
 	public float RespawnTime = 3;
+	public bool InfiniteEnergy = false;
 	public Texture ThrusterIcon;
 	public Texture WeaponIcon;
 	public Texture SensorIcon;
@@ -67,7 +68,10 @@ public class Ship : MonoBehaviour {
 	
 	
 	public bool ActivateThruster(float durationInSeconds) {
-		var energyUse = ThrusterEnergyUsePerSecond * durationInSeconds;
+		var energyUse = 0f;
+		if(!InfiniteEnergy) {
+			energyUse = ThrusterEnergyUsePerSecond * durationInSeconds;
+		}
 		if(thrusterEnergy >= energyUse) {
 			thrusterEnergy -= energyUse;
 			return true;
@@ -78,7 +82,10 @@ public class Ship : MonoBehaviour {
 	}
 	
 	public bool ActivateWeapon(float durationInSeconds) {
-		var energyUse = WeaponEnergyUsePerSecond * durationInSeconds;
+		var energyUse = 0f;
+		if(!InfiniteEnergy) {
+			energyUse = WeaponEnergyUsePerSecond * durationInSeconds;
+		}
 		if(weaponEnergy >= energyUse) {
 			weaponEnergy -= energyUse;
 			return true;
@@ -89,7 +96,10 @@ public class Ship : MonoBehaviour {
 	}
 
 	public bool ActivateSensor(float durationInSeconds) {
-		var energyUse = SensorEnergyUsePerSecond * durationInSeconds;
+		var energyUse = 0f;
+		if(!InfiniteEnergy) {
+			energyUse = SensorEnergyUsePerSecond * durationInSeconds;
+		}
 		if(sensorEnergy >= energyUse) {
 			sensorEnergy -= energyUse;
 			return true;
